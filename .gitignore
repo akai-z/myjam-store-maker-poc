@@ -1,0 +1,4 @@
+/template/
+/docker/secrets/*
+!/docker/secrets/.gitkeep
+/.env
