@@ -1,0 +1,22 @@
+services:
+  web:
+    build:
+      context: .
+      args:
+        - GIT_EMAIL=${MYJAM_GIT_EMAIL}
+        - GIT_NAME=${MYJAM_GIT_NAME}
+    working_dir: /web
+    volumes:
+      - ./src:/web/src
+    ports:
+      - ${MYJAM_PORT:-8080}:8080
+    secrets:
+      - source: id_rsa
+        target: /root/.ssh/id_rsa
+      - source: known_hosts
+        target: /root/.ssh/known_hosts
+secrets:
+  id_rsa:
+    file: ./docker/secrets/id_rsa
+  known_hosts:
+    file: ./docker/secrets/known_hosts
